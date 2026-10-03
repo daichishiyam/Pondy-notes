@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pondy Notes</title>
+<style>body{background:#FFF5E0;font-family:Arial;padding:10px} .box{background:white;padding:15px;border-radius:15px;margin-bottom:10px} input,select{width:100%;padding:12px;margin:6px 0;border-radius:10px;border:1px solid #ccc;box-sizing:border-box} button{width:100%;padding:13px;background:#E67E22;color:white;border:none;border-radius:10px;font-size:16px} table{width:100%;border-collapse:collapse;font-size:13px} td,th{border:1px solid #ddd;padding:7px}</style>
+</head>
+<body>
+<h3>📒 Pondy Catering Notes</h3>
+<div class="box">
+<input id="place" placeholder="📍 Place - Ex: White Town">
+<input id="members" type="number" placeholder="👥 Members - Ex: 50">
+<input id="date" type="date">
+<input id="cash" type="number" placeholder="💰 Total Cash">
+<input id="adv" type="number" placeholder="💵 Advance">
+<button onclick="save()">💾 Save</button>
+</div>
+<div class="box">
+<h4>Orders</h4>
+<table id="t"><tr><th>Date</th><th>Place</th><th>Members</th><th>Bal</th></tr></table>
+</div>
+<script>
+function save(){let o={place:place.value,members:members.value,date:date.value,cash:cash.value,adv:adv.value,bal:cash.value-adv.value};let a=JSON.parse(localStorage.getItem('a')||'[]');a.push(o);localStorage.setItem('a',JSON.stringify(a));show();place.value='';members.value='';cash.value='';adv.value='';}
+function show(){let a=JSON.parse(localStorage.getItem('a')||'[]');let h='<tr><th>Date</th><th>Place</th><th>Members</th><th>Bal</th></tr>';a.forEach(x=>{h+=`<tr><td>${x.date}</td><td>${x.place}</td><td>${x.members}</td><td>₹${x.bal}</td></tr>`});t.innerHTML=h;}show();
+</script>
+</body>
+</html>
